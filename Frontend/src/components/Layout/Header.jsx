@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isShop = location.pathname.startsWith("/shop");
@@ -51,9 +51,11 @@ export default function Header() {
               <Package className="w-4 h-4" />
               Orders
             </Link>
+            {user.role === "admin" && (
             <Link to="/admin" className={navLinkClass}>
               Admin
             </Link>
+            )}
             <button
               onClick={logout}
               className="flex items-center gap-2 px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-sm transition"

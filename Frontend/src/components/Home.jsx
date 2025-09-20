@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const navigate = useNavigate();
+  const {user} = useAuth();
 
   const slides = [
     "/sweets1.jpg",
@@ -69,6 +71,7 @@ const Home = () => {
                 </span>
               </button>
 
+              {user.role === "admin" && (
               <button
                 className="group px-5 py-3 sm:px-10 sm:py-5 text-sm sm:text-base bg-white/10 backdrop-blur-sm border-2 border-white/20 text-white font-bold rounded-2xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
                 onClick={() => navigate("/admin")}
@@ -78,6 +81,7 @@ const Home = () => {
                   <span>Admin</span>
                 </span>
               </button>
+              )}
             </div>
           </div>
         </div>
